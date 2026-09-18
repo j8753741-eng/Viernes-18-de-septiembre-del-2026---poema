@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#15100d">
+
+<title>✦ Donde mi corazón te guarda en secreto ✦</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    background:
+        radial-gradient(circle at 50% 42%, rgba(255,218,164,.10), transparent 25%),
+        radial-gradient(circle at 20% 80%, rgba(181,116,63,.08), transparent 30%),
+        #15100d;
+    color:#f5e8d4;
+    font-family:"DM Sans",sans-serif;
+    overflow-x:hidden;
+}
+
+/* =========================
+   PARTÍCULAS
+========================= */
+
+.particle{
+    position:fixed;
+    width:3px;
+    height:3px;
+    border-radius:50%;
+    background:rgba(255,224,177,.55);
+    pointer-events:none;
+    animation:float 7s ease-in-out infinite;
+    z-index:0;
+}
+
+.p1{left:12%;top:22%;animation-delay:0s;}
+.p2{left:82%;top:17%;animation-delay:1.4s;}
+.p3{left:23%;top:68%;animation-delay:2.2s;}
+.p4{left:88%;top:73%;animation-delay:3s;}
+.p5{left:51%;top:12%;animation-delay:4s;}
+.p6{left:67%;top:84%;animation-delay:1s;}
+.p7{left:38%;top:91%;animation-delay:2.8s;}
+.p8{left:6%;top:48%;animation-delay:4.5s;}
+
+@keyframes float{
+    0%,100%{
+        transform:translateY(0) scale(.7);
+        opacity:.15;
+    }
+    50%{
+        transform:translateY(-22px) scale(1.3);
+        opacity:.8;
+    }
+}
+
+/* =========================
+   PORTADA
+========================= */
+
+.cover{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:35px 22px;
+    position:relative;
+    z-index:1;
+}
+
+.cover-inner{
+    width:min(520px,100%);
+    text-align:center;
+}
+
+.date{
+    font-size:.68rem;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    color:#c9a77d;
+    margin-bottom:28px;
+    opacity:.85;
+}
+
+.secret-symbol{
+    width:92px;
+    height:92px;
+    margin:0 auto 32px;
+    border:1px solid rgba(221,182,132,.4);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    animation:pulse 4s ease-in-out infinite;
+}
+
+.secret-symbol::before,
+.secret-symbol::after{
+    content:"";
+    position:absolute;
+    border-radius:50%;
+    border:1px solid rgba(221,182,132,.15);
+}
+
+.secret-symbol::before{
+    inset:-12px;
+}
+
+.secret-symbol::after{
+    inset:-25px;
+}
+
+.secret-symbol span{
+    font-family:"Playfair Display",serif;
+    font-size:2rem;
+    color:#e7bf88;
+}
+
+@keyframes pulse{
+    0%,100%{
+        box-shadow:0 0 0 rgba(255,210,150,0);
+    }
+    50%{
+        box-shadow:0 0 45px rgba(255,210,150,.12);
+    }
+}
+
+h1{
+    font-family:"Cinzel",serif;
+    font-weight:500;
+    font-size:clamp(1.55rem,6vw,2.45rem);
+    line-height:1.35;
+    letter-spacing:2px;
+    color:#f8e8d0;
+    margin-bottom:20px;
+}
+
+.subtitle{
+    font-family:"Playfair Display",serif;
+    font-style:italic;
+    color:#c9a77d;
+    font-size:1rem;
+    line-height:1.7;
+    max-width:370px;
+    margin:auto;
+}
+
+.open-button{
+    margin-top:38px;
+    border:1px solid rgba(220,184,137,.5);
+    background:rgba(255,255,255,.025);
+    color:#f1ddc1;
+    padding:14px 28px;
+    border-radius:50px;
+    font-family:"DM Sans",sans-serif;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    font-size:.68rem;
+    cursor:pointer;
+    transition:.35s ease;
+}
+
+.open-button:hover{
+    background:rgba(255,215,165,.09);
+    transform:translateY(-2px);
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+/* =========================
+   CARTA
+========================= */
+
+.letter-section{
+    display:none;
+    min-height:100vh;
+    padding:75px 20px 90px;
+    position:relative;
+    z-index:2;
+}
+
+.letter-section.show{
+    display:block;
+    animation:appear 1.2s ease forwards;
+}
+
+@keyframes appear{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.letter{
+    width:min(650px,100%);
+    margin:auto;
+    padding:42px 28px 48px;
+    position:relative;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,244,225,.075),
+            rgba(255,255,255,.025)
+        );
+
+    border:1px solid rgba(226,190,145,.22);
+    border-radius:22px;
+
+    box-shadow:
+        0 35px 90px rgba(0,0,0,.35),
+        inset 0 1px 0 rgba(255,255,255,.04);
+}
+
+.letter::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:18%;
+    right:18%;
+    height:1px;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(227,188,137,.5),
+        transparent
+    );
+}
+
+.nickname{
+    text-align:center;
+    font-family:"Playfair Display",serif;
+    font-style:italic;
+    color:#d9b783;
+    font-size:1.25rem;
+    margin-bottom:38px;
+}
+
+.poem{
+    font-family:"Playfair Display",serif;
+    font-size:1.05rem;
+    line-height:2;
+    color:#f2e4d0;
+}
+
+.poem p{
+    margin-bottom:23px;
+}
+
+.poem strong{
+    display:block;
+    margin-top:30px;
+    color:#f7d7a7;
+    font-weight:400;
+    font-style:italic;
+}
+
+.signature{
+    text-align:center;
+    margin-top:45px;
+    padding-top:25px;
+    border-top:1px solid rgba(222,184,137,.16);
+}
+
+.signature-name{
+    font-family:"Cinzel",serif;
+    font-size:.78rem;
+    letter-spacing:2px;
+    color:#d9b783;
+}
+
+.final-note{
+    text-align:center;
+    margin-top:65px;
+    color:rgba(244,225,198,.5);
+    font-size:.7rem;
+    letter-spacing:2px;
+    text-transform:uppercase;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:500px){
+
+    .cover{
+        padding:30px 20px;
+    }
+
+    .secret-symbol{
+        width:78px;
+        height:78px;
+        margin-bottom:28px;
+    }
+
+    h1{
+        font-size:1.45rem;
+        letter-spacing:1.5px;
+    }
+
+    .subtitle{
+        font-size:.92rem;
+    }
+
+    .letter-section{
+        padding:50px 14px 70px;
+    }
+
+    .letter{
+        padding:34px 21px 38px;
+        border-radius:18px;
+    }
+
+    .nickname{
+        font-size:1.15rem;
+        margin-bottom:30px;
+    }
+
+    .poem{
+        font-size:1rem;
+        line-height:1.9;
+    }
+
+    .poem p{
+        margin-bottom:20px;
+    }
+
+    .signature-name{
+        font-size:.68rem;
+        letter-spacing:1.5px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- PARTÍCULAS -->
+<div class="particle p1"></div>
+<div class="particle p2"></div>
+<div class="particle p3"></div>
+<div class="particle p4"></div>
+<div class="particle p5"></div>
+<div class="particle p6"></div>
+<div class="particle p7"></div>
+<div class="particle p8"></div>
+
+<!-- =========================
+     PORTADA
+========================= -->
+
+<section class="cover" id="cover">
+
+    <div class="cover-inner">
+
+        <div class="date">
+            VIERNES · 18 · SEPTIEMBRE · 2026
+        </div>
+
+        <div class="secret-symbol">
+            <span>♡</span>
+        </div>
+
+        <h1>
+            ✦ DONDE MI CORAZÓN<br>
+            TE GUARDA EN SECRETO ✦
+        </h1>
+
+        <div class="subtitle">
+            Hay palabras que no necesitan una hora exacta.<br>
+            Solo necesitan llegar hasta ti.
+        </div>
+
+        <button class="open-button" onclick="openLetter()">
+            Abrir lo que preparé para ti
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CARTA
+========================= -->
+
+<section class="letter-section" id="letterSection">
+
+    <article class="letter">
+
+        <div class="nickname">
+            Mi Estrellita de Amor Infinito,
+        </div>
+
+        <div class="poem">
+
+            <p>
+                Desde temprano dejé estas palabras esperando por ti,<br>
+                porque aunque las leas al despertar, al mediodía o cuando termine tu día,<br>
+                quería que supieras que hubo un momento en el que pensé en ti<br>
+                y mi corazón volvió a pronunciar tu nombre sin que nadie se lo pidiera.
+            </p>
+
+            <p>
+                Tú eres ese amor que no sé explicar sin quedarme corto,<br>
+                esa persona que consigue hacerme sentir demasiado<br>
+                con una sola mirada, un mensaje o un simple “te amo”.
+            </p>
+
+            <p>
+                Y si hoy pudiera acercarme a ti por un instante,<br>
+                no te diría solamente cuánto te amo…<br>
+                te abrazaría fuerte, te miraría a los ojos<br>
+                y dejaría que sintieras todo aquello<br>
+                que a veces mis palabras no alcanzan a decir.
+            </p>
+
+            <p>
+                Porque te deseo en mis días,<br>
+                te extraño en mis silencios<br>
+                y te amo con una intensidad<br>
+                que cada mañana parece encontrar una forma nueva de crecer.
+            </p>
+
+            <p>
+                <strong>
+                    Y si existe un lugar donde mi corazón siempre quiere volver,<br>
+                    ese lugar, mi amor, siempre vas a ser tú.
+                </strong>
+            </p>
+
+        </div>
+
+        <div class="signature">
+
+            <div class="signature-name">
+                VALERIA PETRO VILLAZÓN
+            </div>
+
+        </div>
+
+    </article>
+
+    <div class="final-note">
+        preparado para ti desde temprano · viernes 18
+    </div>
+
+</section>
+
+
+<script>
+
+function openLetter(){
+
+    const cover = document.getElementById("cover");
+    const letter = document.getElementById("letterSection");
+
+    cover.style.transition = "opacity .8s ease, transform .8s ease";
+    cover.style.opacity = "0";
+    cover.style.transform = "scale(.97)";
+
+    setTimeout(() => {
+
+        cover.style.display = "none";
+
+        letter.classList.add("show");
+
+        window.scrollTo({
+            top:0,
+            behavior:"smooth"
+        });
+
+    },800);
+}
+
+</script>
+
+</body>
+  </html>
